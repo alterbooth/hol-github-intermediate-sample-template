@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.3.255.40792",
-      "templateHash": "14909261365252831566"
+      "version": "0.12.40.16777",
+      "templateHash": "13792971499538875487"
     }
   },
   "parameters": {
@@ -21,7 +21,6 @@
       "defaultValue": "[resourceGroup().location]"
     }
   },
-  "functions": [],
   "variables": {
     "appPrefix": "[format('{0}{1}', parameters('appName'), substring(uniqueString(resourceGroup().id), 0, 4))]",
     "appServicePlanName": "[format('plan-{0}', variables('appPrefix'))]",
@@ -30,7 +29,7 @@
   "resources": [
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2019-10-01",
+      "apiVersion": "2020-10-01",
       "name": "appServicePlanDeploy",
       "properties": {
         "expressionEvaluationOptions": {
@@ -54,8 +53,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.3.255.40792",
-              "templateHash": "4267808591223880496"
+              "version": "0.12.40.16777",
+              "templateHash": "17473375567183841612"
             }
           },
           "parameters": {
@@ -87,7 +86,6 @@
               ]
             }
           },
-          "functions": [],
           "resources": [
             {
               "type": "Microsoft.Web/serverfarms",
@@ -97,7 +95,7 @@
               "sku": {
                 "name": "[parameters('sku')]"
               },
-              "kind": "linux",
+              "kind": "windows",
               "properties": {
                 "reserved": true
               }
@@ -114,7 +112,7 @@
     },
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2019-10-01",
+      "apiVersion": "2020-10-01",
       "name": "webAppDeploy",
       "properties": {
         "expressionEvaluationOptions": {
@@ -129,7 +127,7 @@
             "value": "[parameters('location')]"
           },
           "appServicePlanId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'appServicePlanDeploy'), '2019-10-01').outputs.id.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'appServicePlanDeploy'), '2020-10-01').outputs.id.value]"
           },
           "linuxFxVersion": {
             "value": "DOTNETCORE|6.0"
@@ -141,8 +139,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.3.255.40792",
-              "templateHash": "4091436680797872262"
+              "version": "0.12.40.16777",
+              "templateHash": "944661188257313793"
             }
           },
           "parameters": {
@@ -159,7 +157,6 @@
               "type": "string"
             }
           },
-          "functions": [],
           "resources": [
             {
               "type": "Microsoft.Web/sites",
@@ -187,7 +184,7 @@
             },
             "defaultHostName": {
               "type": "string",
-              "value": "[reference(resourceId('Microsoft.Web/sites', parameters('name'))).defaultHostName]"
+              "value": "[reference(resourceId('Microsoft.Web/sites', parameters('name')), '2022-03-01').defaultHostName]"
             }
           }
         }
