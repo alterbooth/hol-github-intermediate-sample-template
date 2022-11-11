@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.12.40.16777",
-      "templateHash": "13792971499538875487"
+      "templateHash": "3571790342760207038"
     }
   },
   "parameters": {
@@ -54,7 +54,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.12.40.16777",
-              "templateHash": "17473375567183841612"
+              "templateHash": "3975260322529268661"
             }
           },
           "parameters": {
@@ -71,6 +71,7 @@
               },
               "allowedValues": [
                 "F1",
+                "D1",
                 "B1",
                 "B2",
                 "B3",
@@ -94,10 +95,6 @@
               "location": "[parameters('location')]",
               "sku": {
                 "name": "[parameters('sku')]"
-              },
-              "kind": "windows",
-              "properties": {
-                "reserved": true
               }
             }
           ],
@@ -129,8 +126,8 @@
           "appServicePlanId": {
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'appServicePlanDeploy'), '2020-10-01').outputs.id.value]"
           },
-          "linuxFxVersion": {
-            "value": "DOTNETCORE|6.0"
+          "netFrameworkVersion": {
+            "value": "v6.0"
           }
         },
         "template": {
@@ -140,7 +137,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.12.40.16777",
-              "templateHash": "944661188257313793"
+              "templateHash": "4131584273176080697"
             }
           },
           "parameters": {
@@ -153,7 +150,7 @@
             "appServicePlanId": {
               "type": "string"
             },
-            "linuxFxVersion": {
+            "netFrameworkVersion": {
               "type": "string"
             }
           },
@@ -169,7 +166,7 @@
                 "httpsOnly": true,
                 "clientAffinityEnabled": false,
                 "siteConfig": {
-                  "linuxFxVersion": "[parameters('linuxFxVersion')]",
+                  "netFrameworkVersion": "[parameters('netFrameworkVersion')]",
                   "alwaysOn": false,
                   "http20Enabled": false,
                   "ftpsState": "FtpsOnly"
